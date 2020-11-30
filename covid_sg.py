@@ -83,6 +83,7 @@ DEATHS__COLNAME, DEATHS__COLOR  = 'deaths', 'DARKSLATEGRAY'
 LAST_DAYS = 30
 
 # Constants
+DATE__FIRSTCASE = '2020-01-23'
 DATE__DORSCONORANGE = '2020-02-07'
 DATE__CIRCUITBREAKER1 = '2020-04-07'
 DATE__CIRCUITBREAKER2 = '2020-04-21'
@@ -151,24 +152,27 @@ for md, (m1,m2) in enumerate(zip(month_dates, month_indices)):
     else:
         ax.fill_between([m2,x.max()], ylim_max*0.0, ylim_max*0.1, facecolor='SILVER')
 
+# First Case
+fc_index = df_sg[df_sg.date==DATE__FIRSTCASE].index[0]
+ax.fill_between([fc_index,x.max()], ylim_max*0.1, ylim_max, facecolor='PEACHPUFF')
 # DORSCON Orange
 do_index = df_sg[df_sg.date==DATE__DORSCONORANGE].index[0]
 ax.fill_between([do_index,x.max()], ylim_max*0.1, ylim_max, facecolor='PAPAYAWHIP')
 # Circuit Breaker
-ckr_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER1].index[0]
-ax.fill_between([ckr_index,x.max()], ylim_max*0.1, ylim_max, facecolor='MOCCASIN')
+cb1_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER1].index[0]
+ax.fill_between([cb1_index,x.max()], ylim_max*0.1, ylim_max, facecolor='MOCCASIN')
 # Circuit Breaker Tighter Measures
-eckr_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER2].index[0]
-ax.fill_between([eckr_index,x.max()], ylim_max*0.1, ylim_max, facecolor='PEACHPUFF')
+cb2_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER2].index[0]
+ax.fill_between([cb2_index,x.max()], ylim_max*0.1, ylim_max, facecolor='PEACHPUFF')
 # Circuit Breaker
-ckr_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER3].index[0]
-ax.fill_between([ckr_index,x.max()], ylim_max*0.1, ylim_max, facecolor='MOCCASIN')
+cb3_index = df_sg[df_sg.date==DATE__CIRCUITBREAKER3].index[0]
+ax.fill_between([cb3_index,x.max()], ylim_max*0.1, ylim_max, facecolor='MOCCASIN')
 # Phase 1
-ckr_index = df_sg[df_sg.date==DATE__PHASE1].index[0]
-ax.fill_between([ckr_index,x.max()], ylim_max*0.1, ylim_max, facecolor='THISTLE')
+p1_index = df_sg[df_sg.date==DATE__PHASE1].index[0]
+ax.fill_between([p1_index,x.max()], ylim_max*0.1, ylim_max, facecolor='THISTLE')
 # Phase 2
-ckr_index = df_sg[df_sg.date==DATE__PHASE2].index[0]
-ax.fill_between([ckr_index,x.max()], ylim_max*0.1, ylim_max, facecolor='LIGHTGREEN')
+p2_index = df_sg[df_sg.date==DATE__PHASE2].index[0]
+ax.fill_between([p2_index,x.max()], ylim_max*0.1, ylim_max, facecolor='LIGHTGREEN')
 
 # Grid & Legend
 ax.grid(color='LIGHTGRAY')
@@ -184,13 +188,13 @@ ax.text(df_sg.index.max()-2, count_deaths+500, str(count_deaths), fontsize=14, f
 
 tbegin, tstep, tfsize = 0.98, 0.05, 10
 tcolor='BROWN'
-ax.text(do_index-do_index+0.5, ylim_max*(tbegin-tstep*1),note1text, fontsize=tfsize, color=tcolor)
+ax.text(fc_index+0.5, ylim_max*(tbegin-tstep*1),note1text, fontsize=tfsize, color=tcolor)
 ax.text(do_index+0.5, ylim_max*(tbegin-tstep*2),note2text, fontsize=tfsize, color=tcolor)
-ax.text(do_index+62, ylim_max*(tbegin-tstep*3),note3text, fontsize=tfsize, color=tcolor)
-ax.text(do_index+76, ylim_max*(tbegin-tstep*4),note4text, fontsize=tfsize, color=tcolor)
-ax.text(do_index+96, ylim_max*(tbegin-tstep*5),note5text, fontsize=tfsize, color=tcolor)
-ax.text(do_index+118, ylim_max*(tbegin-tstep*6),note6text, fontsize=tfsize, color=tcolor)
-ax.text(do_index+134, ylim_max*(tbegin-tstep*7),note7text, fontsize=tfsize, color=tcolor)
+ax.text(cb1_index+0.5, ylim_max*(tbegin-tstep*3),note3text, fontsize=tfsize, color=tcolor)
+ax.text(cb2_index+0.5, ylim_max*(tbegin-tstep*4),note4text, fontsize=tfsize, color=tcolor)
+ax.text(cb3_index+0.5, ylim_max*(tbegin-tstep*5),note5text, fontsize=tfsize, color=tcolor)
+ax.text(p1_index+0.5, ylim_max*(tbegin-tstep*6),note6text, fontsize=tfsize, color=tcolor)
+ax.text(p2_index+0.5, ylim_max*(tbegin-tstep*7),note7text, fontsize=tfsize, color=tcolor)
 
 # ax.text(do_index+0.5, ylim_max*(tbegin-tstep*(7+3)),note2atext, fontsize=10, color=tcolor)
 # ax.text(do_index+0.5, ylim_max*(tbegin-tstep*(7+4.5)),note2btext, fontsize=10, color=tcolor)
